@@ -29,7 +29,7 @@
 
 
 //crear objeto dinámicamente. Commit Creado ya con datos
- $(document).ready(function(){
+/* $(document).ready(function(){
 
     solicitud  = {
         
@@ -44,5 +44,53 @@
             $("<li>").text(solicitudes[i].nombre + ' ' + solicitudes[i].apellido )
         );
     }
+
+    // creando la zona de detalle
+    // la zona de abajo le vamos a cambiar de no visible a visible al hacer click
+    $("#id").val(solicitud.id); // fijaria el valor del id
+    $("#nombre").val(solicitud.nombre);
+    $("#apellido").val(solicitud.apellido);
+});   */
+
+$(document).ready(function() {
+    let solicitudes = [{
+        "id": 1, 
+        "nombre": "Juan",
+        "apellido": "Secreto"
+    }, {
+        "id": 2, 
+        "nombre": "Antonio",
+        "apellido": "Pero"
+    }, {
+        "id": 3, 
+        "nombre": "de la Encarnación",
+        "apellido": "No tanto"
+    }];
+
+
+    for (i = 0 ; i < solicitudes.length; i++ ) {
+        $("#maestro").append(
+            $("<li>")
+                .text(solicitudes[i].nombre + ' ' + solicitudes[i].apellido)
+                .val(solicitudes[i])
+                .attr("id", "id" + solicitudes[i].id)
+        );
+    }
+
+
+
+    $("li").on("click", function(event) {
+        if ($("#detalle").is(':visible')) {
+            $("#detalle").hide();
+        } else {
+            $("#detalle").show();
+
+            let solicitud = $(this).attr("id");
+
+            $("#id").val(solicitud);
+            $("#nombre").val("Juan"  + solicitud);
+            $("#apellido").val("Secreto" + solicitud);            
+        }
+        
+    })
 });
- 
